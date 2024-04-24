@@ -30,12 +30,10 @@ export default class TaskList {
 
       const button = document.createElement("button");
       button.classList.add("addButtonCard");
-      // button.classList.add("delete");
       button.textContent = "Add card";
       addCard.appendChild(button);
     }
     this.addText();
-    // this.transfer();
   }
 
   addText() {
@@ -49,24 +47,27 @@ export default class TaskList {
         if (!addAnotherCard.classList.contains('delete')) {
           addAnotherCard.classList.toggle('delete');
           addButtonCards[index].classList.toggle('input');
-          // Создаем новое поле ввода
+
           const inputField = document.createElement('textarea');
           inputField.setAttribute('type', 'text');
           inputField.classList.add('enter');
           inputField.setAttribute('placeholder', 'Enter text here');
-          // // Добавляем новое поле ввода после кнопки
+
           addAnotherCard.parentNode.insertBefore(inputField, addAnotherCard.nextSibling);
 
           addButtonCards[index].addEventListener('click', () => {
             if (inputField.value.trim() !== '') {
+              const randomNumber = Math.floor(Math.random() * 100);
               const divDescription = document.createElement('div');
               divDescription.classList.add('descriptionText');
+              divDescription.setAttribute('draggable', 'true');
+              divDescription.setAttribute('id', randomNumber);
               divDescription.textContent = inputField.value;
               descript[index].appendChild(divDescription);
 
               const buttonDescription = document.createElement('button');
               buttonDescription.classList.add('deleteCard');
-              buttonDescription.textContent = "✘";
+              buttonDescription.textContent = "✖";
               divDescription.appendChild(buttonDescription);
 
               if (inputField && inputField.parentNode) {
@@ -76,22 +77,20 @@ export default class TaskList {
               addButtonCards[index].classList.toggle('input');
               inputField.value = '';
               this.deleteText();
+              this.transfer();
             } else {
               addAnotherCard.classList.toggle('delete');
               addButtonCards[index].classList.toggle('input');
               inputField.parentNode.removeChild(inputField);
             }
-          }, { once: true }); // Обработчик события сработает только один раз
+          }, { once: true });
         }
       });
     });
   }
 
   deleteText() {
-    // console.log('delete');
-    
     const delButtons = document.querySelectorAll('.deleteCard');
-    // console.log(`текст: ${descriptionTexts}`);
     delButtons.forEach((button) => {
       button.addEventListener('click', (event) => {
         const divDescription = button.parentElement;
@@ -100,10 +99,34 @@ export default class TaskList {
     })
   }
 
-  transfer() {
+  transfer () {
     console.log("transfer");
+    const desc = document.querySelectorAll('.description');
+    const ufos = document.querySelectorAll('.descriptionText');
+
+    ufos.forEach((ufo) => {
+      ufo.ondragstart = drag;
+    });
+    function drag (event) {
+      event.dataTransfer.setData('id', event.target.id);
+    }
+
+    desc.forEach((des) => {
+      des.ondragover = allowDrop;
+      function allowDrop (event) {
+        event.preventDefault();
+      }
+
+      des.ondrop = drop;
+      function drop (event) {
+        let itemId = event.dataTransfer.getData('id');
+        let draggedItem = document.getElementById(itemId);
+        let target = event.target;
+
+        if (!target.closest('.descriptionText')) {
+          event.target.appendChild(draggedItem);
+        }
+      }
+    })
   }
 }
-
-// 1. перетаскивание элементов.
-
