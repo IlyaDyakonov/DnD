@@ -87,15 +87,29 @@
   position: relative;
 }
 
-.descriptionText:before {
-  content: "\2716";
-  font-family: "Arial Unicode MS", sans-serif;
-  font-size: 20px;
+.descriptionText:hover .deleteCard {
+  opacity: 1; /* Показываем кнопку */
+}
+
+.deleteCard {
+  font-size: 15px;
   position: absolute;
-  top: 1px;
-  right: 7px;
+  color: red;
+  top: 5px;
+  right: 5px;
+  width: 25px;
+  height: 25px;
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.6s;
+  background-color: rgb(255, 255, 208);
+  border-radius: 5px;
+}
+
+.deleteCard:hover {
+  background-color: yellow;
+  box-shadow: 5px 5px 5px rgb(78, 78, 78);
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .descriptionText:hover::before {

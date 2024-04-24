@@ -35,8 +35,7 @@ export default class TaskList {
       addCard.appendChild(button);
     }
     this.addText();
-    this.transfer();
-    // this.delete();
+    // this.transfer();
   }
 
   addText() {
@@ -65,12 +64,18 @@ export default class TaskList {
               divDescription.textContent = inputField.value;
               descript[index].appendChild(divDescription);
 
+              const buttonDescription = document.createElement('button');
+              buttonDescription.classList.add('deleteCard');
+              buttonDescription.textContent = "✘";
+              divDescription.appendChild(buttonDescription);
+
               if (inputField && inputField.parentNode) {
                 inputField.parentNode.removeChild(inputField);
               }
               addAnotherCard.classList.toggle('delete');
               addButtonCards[index].classList.toggle('input');
               inputField.value = '';
+              this.deleteText();
             } else {
               addAnotherCard.classList.toggle('delete');
               addButtonCards[index].classList.toggle('input');
@@ -78,26 +83,27 @@ export default class TaskList {
             }
           }, { once: true }); // Обработчик события сработает только один раз
         }
-        
       });
     });
   }
 
-  // delete() {
-  //   console.log('delete');
-  //   const descriptionTexts = document.querySelectorAll('.descriptionText');
-  //   // Добавляем обработчик события клика на каждую кнопку ::before
-  //   descriptionTexts.forEach(function(element) {
-  //     console.log(element);
-  //     const beforeElement = element.querySelector('::before');
-  //     beforeElement.addEventListener('click', function() {
-  //       // Удаляем родительский элемент при клике
-  //       element.parentNode.removeChild(element);
-  //     });
-  //   });
-  // }
+  deleteText() {
+    // console.log('delete');
+    
+    const delButtons = document.querySelectorAll('.deleteCard');
+    // console.log(`текст: ${descriptionTexts}`);
+    delButtons.forEach((button) => {
+      button.addEventListener('click', (event) => {
+        const divDescription = button.parentElement;
+        divDescription.remove();
+      });
+    })
+  }
 
   transfer() {
     console.log("transfer");
   }
 }
+
+// 1. перетаскивание элементов.
+
