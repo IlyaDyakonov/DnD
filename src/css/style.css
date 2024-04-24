@@ -1,0 +1,103 @@
+.task {
+  width: 100%;
+  font-size: 20px;
+  padding: 5px;
+  display: flex;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  padding: 1%;
+  background-color: rgb(209, 209, 209);
+  border: 1px solid #500000;
+  margin: 3%;
+  border-radius: 15px;
+}
+
+.title {
+  font-size: 30px;
+  padding: 1%;
+  background-color: rgb(252, 127, 127);
+  border: 1px solid #500000;
+  margin: 2%;
+  border-radius: 5px;
+}
+
+.description {
+  flex-grow: 1;
+  padding: 1%;
+  height: 70%;
+  min-height: 300px;
+  border: 1px solid #000000;
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
+  margin: 2%;
+}
+
+.addAnotherCard {
+  padding: 1%;
+  background-color: rgb(245, 255, 160);
+  margin: 2%;
+  cursor: pointer;
+}
+
+.addAnotherCard.delete {
+  display: none;
+}
+
+.addAnotherCard:not(.delete) {
+  display: block;
+}
+
+.addButtonCard {
+  border-radius: 5px;
+  margin: 2%;
+  width: 100px;
+  height: 30px;
+  background-color: aqua;
+}
+
+.addButtonCard.input {
+  display: block;
+}
+
+.addButtonCard:not(.input) {
+  display: none;
+}
+
+.enter {
+  font-size: 15px;
+  resize: vertical;
+  margin: 2%;
+  border-radius: 5px;
+  width: 94%;
+  min-height: 50px;
+  max-height: 200px;
+}
+
+.descriptionText {
+  min-height: 50px;
+  margin: 2%;
+  padding: 2%;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background-color: rgb(184, 255, 170);
+  position: relative;
+}
+
+.descriptionText:before {
+  content: "\2716";
+  font-family: "Arial Unicode MS", sans-serif;
+  font-size: 20px;
+  position: absolute;
+  top: 1px;
+  right: 7px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.descriptionText:hover::before {
+  opacity: 1;
+}
