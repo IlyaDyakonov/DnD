@@ -1,3 +1,7 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/dgakxmdsb9ra8sxu?svg=true)](https://ci.appveyor.com/project/IlyaDyakonov/dnd)
+
+
+
 # Домашнее задание к занятию "6. Работа с файлами, DnD"
 
 Правила сдачи задания:
