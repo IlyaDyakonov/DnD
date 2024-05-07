@@ -1,3 +1,6 @@
+import Sortable from "sortablejs";
+
+
 export default class TaskList {
   constructor() {
 
@@ -37,7 +40,6 @@ export default class TaskList {
   }
 
   addText() {
-    console.log("add");
     const addAnotherCards = document.querySelectorAll(".addAnotherCard");
     const addButtonCards = document.querySelectorAll(".addButtonCard");
     const descript = document.querySelectorAll(".description");
@@ -100,7 +102,6 @@ export default class TaskList {
   }
 
   transfer () {
-    console.log("transfer");
     const desc = document.querySelectorAll('.description');
     const ufos = document.querySelectorAll('.descriptionText');
 
@@ -128,5 +129,13 @@ export default class TaskList {
         }
       }
     })
+
+    for (const col of desc) {
+      new Sortable(col, {
+        group: 'shared',
+        animation: 350,
+        draggable: '.descriptionText',
+      })
+    }
   }
 }
