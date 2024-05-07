@@ -105,31 +105,6 @@ export default class TaskList {
     const desc = document.querySelectorAll('.description');
     const ufos = document.querySelectorAll('.descriptionText');
 
-    ufos.forEach((ufo) => {
-      ufo.ondragstart = drag;
-    });
-    function drag (event) {
-      event.dataTransfer.setData('id', event.target.id);
-    }
-
-    desc.forEach((des) => {
-      des.ondragover = allowDrop;
-      function allowDrop (event) {
-        event.preventDefault();
-      }
-
-      des.ondrop = drop;
-      function drop (event) {
-        let itemId = event.dataTransfer.getData('id');
-        let draggedItem = document.getElementById(itemId);
-        let target = event.target;
-
-        if (!target.closest('.descriptionText')) {
-          event.target.appendChild(draggedItem);
-        }
-      }
-    })
-
     for (const col of desc) {
       new Sortable(col, {
         group: 'shared',
